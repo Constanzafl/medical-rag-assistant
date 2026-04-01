@@ -1,0 +1,24 @@
+# Environment
+.env
+venv/
+poetry.lock
+
+# Vector store (regenerable from source PDF)
+chroma_db/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Source data (don't commit copyrighted PDFs)
+data/*.pdf
