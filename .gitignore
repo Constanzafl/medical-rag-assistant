@@ -4,7 +4,7 @@ venv/
 poetry.lock
 
 # Vector store (regenerable from source PDF)
-#chroma_db/
+chroma_db/
 
 # Python
 __pycache__/
