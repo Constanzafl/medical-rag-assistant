@@ -21,4 +21,4 @@ __pycache__/
 Thumbs.db
 
 # Source data (don't commit copyrighted PDFs)
-data/*.pdf
+#data/*.pdf
