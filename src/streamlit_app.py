@@ -23,10 +23,19 @@ st.caption("Consultas sobre el Consenso Argentino de Hipertensión Arterial — 
 # --- Inicializar chain (una sola vez, se cachea) ---
 @st.cache_resource
 def init_chain():
+    # Si no existe el vector store, correr la ingesta
+    if not os.path.exists("./chroma_db") or not os.listdir("./chroma_db"):
+        from ingest import ingest
+        ingest("data/COMPLETO-E-41.pdf")
     chain, retriever = create_rag_chain()
     return chain, retriever
 
-chain, retriever = init_chain()
+# @st.cache_resource
+# def init_chain():
+#     chain, retriever = create_rag_chain()
+#     return chain, retriever
+
+# chain, retriever = init_chain()
 
 # --- Historial de chat ---
 if "messages" not in st.session_state:
