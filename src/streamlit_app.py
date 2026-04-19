@@ -33,11 +33,6 @@ def init_chain():
         st.error(f"Error inicializando: {e}")
         raise e
 
-@st.cache_resource
-def init_chain():
-    chain, retriever = create_rag_chain()
-    return chain, retriever
-
 chain, retriever = init_chain()
 
 # --- Historial de chat ---
