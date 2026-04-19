@@ -1,5 +1,8 @@
 """
+streamlit_app.py - Interfaz web para el asistente médico RAG.
 
+Uso:
+    streamlit run src/streamlit_app.py
 """
 
 import streamlit as st
@@ -23,18 +26,10 @@ st.caption("Consultas sobre el Consenso Argentino de Hipertensión Arterial — 
 # --- Inicializar chain (una sola vez, se cachea) ---
 @st.cache_resource
 def init_chain():
-    try:
-        if not os.path.exists("./chroma_db") or not os.listdir("./chroma_db"):
-            from ingest import ingest
-            ingest("data/COMPLETO-E-41.pdf")
-        chain, retriever = create_rag_chain()
-        return chain, retriever
-    except Exception as e:
-        st.error(f"Error inicializando: {e}")
-        raise e
+    chain, retriever = create_rag_chain()
+    return chain, retriever
 
 chain, retriever = init_chain()
-
 
 # --- Historial de chat ---
 if "messages" not in st.session_state:
@@ -92,6 +87,6 @@ with st.sidebar:
         """
     )
     
-    if st.button("Limpiar historial"):
+    if st.button("🗑️ Limpiar historial"):
         st.session_state.messages = []
         st.rerun()
