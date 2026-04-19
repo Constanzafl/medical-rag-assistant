@@ -23,12 +23,15 @@ st.caption("Consultas sobre el Consenso Argentino de Hipertensión Arterial — 
 # --- Inicializar chain (una sola vez, se cachea) ---
 @st.cache_resource
 def init_chain():
-    # Si no existe el vector store, correr la ingesta
-    if not os.path.exists("./chroma_db") or not os.listdir("./chroma_db"):
-        from ingest import ingest
-        ingest("data/COMPLETO-E-41.pdf")
-    chain, retriever = create_rag_chain()
-    return chain, retriever
+    try:
+        if not os.path.exists("./chroma_db") or not os.listdir("./chroma_db"):
+            from ingest import ingest
+            ingest("data/COMPLETO-E-41.pdf")
+        chain, retriever = create_rag_chain()
+        return chain, retriever
+    except Exception as e:
+        st.error(f"Error inicializando: {e}")
+        raise e
 
 # @st.cache_resource
 # def init_chain():
