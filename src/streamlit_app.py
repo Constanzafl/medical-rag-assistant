@@ -35,11 +35,6 @@ def init_chain():
 
 chain, retriever = init_chain()
 
-# Debug temporal - borrar después
-from vectorstore import load_vectorstore
-vs = load_vectorstore()
-count = vs._collection.count()
-st.sidebar.write(f"📊 Documentos en vector store: {count}")
 
 # --- Historial de chat ---
 if "messages" not in st.session_state:
